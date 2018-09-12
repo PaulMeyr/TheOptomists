@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Networking;
 
 [AddComponentMenu("Player Controller")]
-public class PlayerController : MonoBehaviour {
+public class PlayerController : NetworkBehaviour
+{
 	public bool active = false;
 	public float speed = 2.0f;
 	public float rotateSpeed = 3.0f;
@@ -19,16 +20,32 @@ public class PlayerController : MonoBehaviour {
     public Vector2 targetCharacterDirection;
     public Vector3 velocity = Vector3.zero;
     public Vector3 knockBackVel = Vector3.zero;
-    
+    [SyncVar]
+    public float health = 100;
+
+
+    private float grenadeWindUp = 0;
+
     // Assign this if there's a parent object controlling motion, such as a Character Controller.
     // Yaw rotation will affect this object instead of the camera if set.
-    public GameObject characterBody;
- 
+    public GameObject characterBody = null;
+    public GameObject characterEyes = null;
+    public NetworkIdentity characterBodyIdentity = null;
+    public PlayerControllerSpawner objectSpawner = null;
+    public Camera playerCamera = null;
     void Start()
     {
         targetDirection = transform.localRotation.eulerAngles;
         if (characterBody)
+        {
             targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
+            characterBodyIdentity = characterBody.GetComponent<NetworkIdentity>();
+            if (characterBodyIdentity == null)
+                Debug.LogError("Character Body did not have a Network Identity.");
+            objectSpawner = characterBody.GetComponent<PlayerControllerSpawner>();
+            if (objectSpawner == null)
+                Debug.LogError("Character Body did not have a PlayerControllerSpawner.");
+        }
     }
 
     //puts us back on the terrain if we fall off.
@@ -55,8 +72,22 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-
-
+        if (!characterBodyIdentity.isLocalPlayer)
+        {
+            return;
+        }
+   
+        if (!playerCamera.enabled)
+        {
+            if (Camera.main != null)
+            {
+                Camera.main.enabled = false;
+            }
+            playerCamera.enabled = true;
+            playerCamera.tag = "MainCamera";
+        }
+        playerCamera.enabled = true;
+        playerCamera.tag = "MainCamera";
         // Ensure the cursor is always locked when set
         if (lockCursor)
         {
@@ -75,8 +106,8 @@ public class PlayerController : MonoBehaviour {
             _mouseAbsolute.x = Mathf.Clamp(_mouseAbsolute.x, -clampInDegrees.x * 0.5f, clampInDegrees.x * 0.5f);
         if (clampInDegrees.y < 360)
             _mouseAbsolute.y = Mathf.Clamp(_mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
- 
-        transform.localRotation = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right) * targetOrientation;
+
+        characterEyes.transform.localRotation = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right) * targetOrientation;
  
         // If there's a character body that acts as a parent to the camera
         if (characterBody)
@@ -144,11 +175,35 @@ public class PlayerController : MonoBehaviour {
             sprintMult = 1.5f;
         }
 
-		if (active) {
-			controller.Move (((forward * curSpeedV * crouchMult * sprintMult) + (right * curSpeedH * crouchMult) + velocity + knockBackVel) * Time.deltaTime);
+        if (Input.GetButtonDown("Fire1"))
+        {
+            grenadeWindUp += Time.deltaTime;
+        }
 
+        if(Input.GetButtonUp("Fire1"))
+        {
+            objectSpawner.Cmd_throwGrenade(grenadeWindUp);
+            grenadeWindUp = 0;
+        }
+
+        if (active) {
+			controller.Move (((forward * curSpeedV * crouchMult * sprintMult) + (right * curSpeedH * crouchMult) + velocity + knockBackVel) * Time.deltaTime);
 		}
     }
 
-    
+    //TODO - BUG - figure out if this is even being called
+    public override void OnStartLocalPlayer()
+    {
+        GetComponent<MeshRenderer>().material.color = Color.blue;
+        //make sure we are using the local camera if we are spawned.
+        if (Camera.main != playerCamera)
+        {
+            if (Camera.main != null)
+            {
+                Camera.main.enabled = false;
+            }
+            playerCamera.enabled = true;
+            playerCamera.tag = "MainCamera";
+        }
+    }
 }
