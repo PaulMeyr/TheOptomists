@@ -89,7 +89,7 @@ public class Grenade : NetworkBehaviour {
             if (takerRB)
             {
                 //throw rigidbodies.
-                takerRB.AddExplosionForce(knockBackForce, gameObject.transform.position, damageRadius);
+                takerRB.AddExplosionForce(knockBackForce * 10.0f, gameObject.transform.position, damageRadius);
             }
             
             i++;
