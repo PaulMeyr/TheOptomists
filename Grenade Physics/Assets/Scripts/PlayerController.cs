@@ -21,16 +21,15 @@ public class PlayerController : NetworkBehaviour
     public Vector2 targetCharacterDirection;
     public Vector3 velocity = Vector3.zero;
     public Vector3 knockBackVel = Vector3.zero;
-    [SyncVar]
 
-    //heath
-    public  float health = 100;
+    [SyncVar(hook = "OnChangeHealth")]
+    public float health = 100;
     public const int maxHealth = 100;
     public bool destroyOnDeath;
-   [SyncVar(hook = "OnChangeHealth")]
+
     
     public RectTransform healthBar;
-    //heath
+    
   
 
     private float grenadeWindUp = 0;
@@ -212,11 +211,6 @@ public class PlayerController : NetworkBehaviour
 		}
        
     
-        //heath
-   
-        if (!isServer)
-            return;
-
        
         if (health <= 0)
         {
@@ -235,8 +229,9 @@ public class PlayerController : NetworkBehaviour
 
     }
     //heathbar
-    void OnChangeHealth(int health)
+    void OnChangeHealth(float health)
     {
+        this.health = health;
         healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
     }
 
@@ -261,7 +256,7 @@ public class PlayerController : NetworkBehaviour
     }
 
 
-    //TODO - BUG - figure out if this is even being called
+  
     public override void OnStartLocalPlayer()
     {
         GetComponent<MeshRenderer>().material.color = Color.blue;
