@@ -109,7 +109,11 @@ MonoBehaviour:
   m_MinSize: {x: 681, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
+<<<<<<< HEAD
   controlID: 39
+=======
+  controlID: 84
+>>>>>>> 53215ed0fb7fa17a04e0736c140000f0ab9b251a
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +137,11 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
+<<<<<<< HEAD
   controlID: 40
+=======
+  controlID: 85
+>>>>>>> 53215ed0fb7fa17a04e0736c140000f0ab9b251a
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -203,12 +211,12 @@ MonoBehaviour:
     height: 645
   m_MinSize: {x: 204, y: 221}
   m_MaxSize: {x: 4004, y: 4021}
-  m_ActualView: {fileID: 14}
+  m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 14}
   - {fileID: 12}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -304,10 +312,10 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMin: 1
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
-    m_HSlider: 0
-    m_VSlider: 0
+    m_HSlider: 1
+    m_VSlider: 1
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -366,9 +374,15 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: a42c0000
     m_LastClickedID: 0
     m_ExpandedIDs: b070eeff1a71eeff7072eeff60f9ffff00000000162e0000b82e0000
+=======
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: e6fbffff00000000
+>>>>>>> 53215ed0fb7fa17a04e0736c140000f0ab9b251a
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: Spawnpoint 1 (1)
@@ -508,20 +522,26 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Prefabs
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Prefabs
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\dr.fox\Desktop\Grenade Physics
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: 942b0000
     m_LastClickedID: 11156
     m_ExpandedIDs: 00000000262b0000262d0000
+=======
+    m_SelectedIDs: 74090000
+    m_LastClickedID: 2420
+    m_ExpandedIDs: 0000000046090000de0a0000460b000000ca9a3b
+>>>>>>> 53215ed0fb7fa17a04e0736c140000f0ab9b251a
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: Materials
@@ -549,7 +569,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000262b0000be2c0000262d0000
+=======
+    m_ExpandedIDs: 0000000046090000de0a0000460b0000
+>>>>>>> 53215ed0fb7fa17a04e0736c140000f0ab9b251a
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -576,8 +600,13 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
+<<<<<<< HEAD
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 00000000faa6fbffd892f4fffa060000
+=======
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: 00000000faa6fbffd892f4ff
+>>>>>>> 53215ed0fb7fa17a04e0736c140000f0ab9b251a
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
