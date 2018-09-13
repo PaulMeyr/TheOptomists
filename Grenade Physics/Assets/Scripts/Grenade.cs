@@ -68,7 +68,7 @@ public class Grenade : NetworkBehaviour {
         while (i < hitColliders.Length)
         {
             GameObject taker = hitColliders[i].gameObject;
-            PlayerController takerPC = taker.GetComponentInChildren<PlayerController>();
+            PlayerController  takerPC = taker.GetComponentInChildren<PlayerController>();
             Rigidbody takerRB = taker.GetComponent<Rigidbody>();
             if(takerRB==null&&takerPC==null)
             {

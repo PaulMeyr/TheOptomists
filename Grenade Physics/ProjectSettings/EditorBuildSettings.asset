@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MultiplayerTest.unity
     guid: 7d0caea340a7765458aeafa957441470
+  - enabled: 1
+    path: Assets/Scenes/CharacterControllerTest.unity
+    guid: 1c56e2520004bfd40a9405ad2e102443
   m_configObjects: {}

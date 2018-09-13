@@ -6,7 +6,8 @@ using UnityEngine.Networking;
 [AddComponentMenu("Player Controller")]
 public class PlayerController : NetworkBehaviour
 {
-	public bool active = false;
+    private NetworkStartPosition[] spawnPoints;
+    public bool active = false;
 	public float speed = 2.0f;
 	public float rotateSpeed = 3.0f;
     public float knockBackFalloffRate = 1.00f;
@@ -21,8 +22,16 @@ public class PlayerController : NetworkBehaviour
     public Vector3 velocity = Vector3.zero;
     public Vector3 knockBackVel = Vector3.zero;
     [SyncVar]
-    public float health = 100;
 
+    //heath
+    public  float health = 100;
+    public const int maxHealth = 100;
+    public bool destroyOnDeath;
+   [SyncVar(hook = "OnChangeHealth")]
+    
+    public RectTransform healthBar;
+    //heath
+  
 
     private float grenadeWindUp = 0;
 
@@ -33,9 +42,19 @@ public class PlayerController : NetworkBehaviour
     public NetworkIdentity characterBodyIdentity = null;
     public PlayerControllerSpawner objectSpawner = null;
     public Camera playerCamera = null;
+
+
+
+  
+
     void Start()
     {
-        targetDirection = transform.localRotation.eulerAngles;
+        if (isLocalPlayer)
+        
+            {
+                spawnPoints = FindObjectsOfType<NetworkStartPosition>();
+            }
+            targetDirection = transform.localRotation.eulerAngles;
         if (characterBody)
         {
             targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
@@ -46,6 +65,7 @@ public class PlayerController : NetworkBehaviour
             if (objectSpawner == null)
                 Debug.LogError("Character Body did not have a PlayerControllerSpawner.");
         }
+       
     }
 
     //puts us back on the terrain if we fall off.
@@ -72,6 +92,7 @@ public class PlayerController : NetworkBehaviour
 
     void Update()
     {
+      
         if (!characterBodyIdentity.isLocalPlayer)
         {
             return;
@@ -189,7 +210,56 @@ public class PlayerController : NetworkBehaviour
         if (active) {
 			controller.Move (((forward * curSpeedV * crouchMult * sprintMult) + (right * curSpeedH * crouchMult) + velocity + knockBackVel) * Time.deltaTime);
 		}
+       
+    
+        //heath
+   
+        if (!isServer)
+            return;
+
+       
+        if (health <= 0)
+        {
+            if (destroyOnDeath)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                health = maxHealth;
+
+                // called on the Server, invoked on the Clients
+                RpcRespawn();
+            }
+        }
+
     }
+    //heathbar
+    void OnChangeHealth(int health)
+    {
+        healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+    }
+
+    //respawning
+    [ClientRpc]
+    void RpcRespawn()
+    {
+        if (isLocalPlayer)
+        {
+            // Set the spawn point to origin as a default value
+            Vector3 spawnPoint = Vector3.zero;
+
+            // If there is a spawn point array and the array is not empty, pick one at random
+            if (spawnPoints != null && spawnPoints.Length > 0)
+            {
+                spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+            }
+
+            // Set the player’s position to the chosen spawn point
+            transform.position = spawnPoint;
+        }
+    }
+
 
     //TODO - BUG - figure out if this is even being called
     public override void OnStartLocalPlayer()
