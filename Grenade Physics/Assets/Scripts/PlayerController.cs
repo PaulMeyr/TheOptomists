@@ -214,6 +214,7 @@ public class PlayerController : NetworkBehaviour
        
         if (health <= 0)
         {
+            Debug.Log("Health dropped, respawn rcp?");
             if (destroyOnDeath)
             {
                 Destroy(gameObject);
@@ -221,7 +222,7 @@ public class PlayerController : NetworkBehaviour
             else
             {
                 health = maxHealth;
-
+                knockBackVel = Vector3.zero;
                 // called on the Server, invoked on the Clients
                 RpcRespawn();
             }
@@ -252,6 +253,7 @@ public class PlayerController : NetworkBehaviour
 
             // Set the player’s position to the chosen spawn point
             transform.position = spawnPoint;
+            knockBackVel = Vector3.zero;
         }
     }
 
