@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.SceneManagement;
 [AddComponentMenu("Player Controller")]
 public class PlayerController : NetworkBehaviour
 {
@@ -51,7 +51,11 @@ public class PlayerController : NetworkBehaviour
         if (isLocalPlayer)
         
             {
-                spawnPoints = FindObjectsOfType<NetworkStartPosition>();
+
+            if(GameObject.Find("Ui_ingame_Canvas") == null){
+                SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+            }
+            spawnPoints = FindObjectsOfType<NetworkStartPosition>();
             }
             targetDirection = transform.localRotation.eulerAngles;
         if (characterBody)
@@ -67,19 +71,7 @@ public class PlayerController : NetworkBehaviour
        
     }
 
-    //puts us back on the terrain if we fall off.
-	void resetPositionOnTerrain()
-	{
-		characterBody.GetComponent<CharacterController> ().enabled = false;
-		active = false;
-		Vector3 origin = characterBody.transform.position;
-		origin.y = 1000.0f;
-		Vector3 direction = new Vector3 (0, -1.0f, 0);
-		RaycastHit hit;
-		if (Physics.Raycast (origin, direction, out hit)) {
-			characterBody.transform.position = hit.point + new Vector3(0, 2, 0);
-		}
-	}
+  
 
     //currently unused
     /*
@@ -140,10 +132,11 @@ public class PlayerController : NetworkBehaviour
             var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
             transform.localRotation *= yRotation;
         }
-
-		if (transform.position.y < -500) {
-			resetPositionOnTerrain ();
-		}
+        if (this.transform.position.y <= -3.6f)
+        {
+            RpcRespawn();
+        }
+      
 
 		CharacterController controller = characterBody.GetComponent<CharacterController>();
 		Vector3 forward = characterBody.transform.TransformDirection(Vector3.forward);

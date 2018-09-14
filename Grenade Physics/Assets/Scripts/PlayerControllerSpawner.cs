@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+
 public class PlayerControllerSpawner : NetworkBehaviour
 {
 
     public Transform munitionSpawnLocation = null;
     public GameObject baseGrenadePrefab = null;
 
+   
     // Use this for initialization
     void Start () {
-		
-	}
+     
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+  
 
-    [Command]
+
+[Command]
     public void Cmd_throwGrenade(float cook)
     {      
         GameObject grenade = (GameObject)Instantiate(baseGrenadePrefab, munitionSpawnLocation.position, munitionSpawnLocation.rotation);

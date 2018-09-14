@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CharacterControllerTest.unity
     guid: 1c56e2520004bfd40a9405ad2e102443
+  - enabled: 1
+    path: Assets/UI.unity
+    guid: d53906480238e4c209985042af53450c
   m_configObjects: {}
