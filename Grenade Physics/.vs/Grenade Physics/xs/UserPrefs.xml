@@ -1,8 +1,10 @@
 ﻿<Properties StartupConfiguration="{165BD172-CA53-47D5-0A70-37FAEDE8A3BD}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Grenade.cs">
     <Files>
       <File FileName="Assets/Scripts/PlayerController.cs" Line="33" Column="3" />
+      <File FileName="Assets/Scripts/FragGrenade.cs" Line="10" Column="3" />
+      <File FileName="Assets/Scripts/Grenade.cs" Line="12" Column="64" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -63,21 +63,23 @@
   <ItemGroup>
     <Compile Include="Assets\KnockBack.cs" />
     <Compile Include="Assets\Scripts\CopyPitchRotation.cs" />
+    <Compile Include="Assets\Scripts\FragGrenade.cs" />
+    <Compile Include="Assets\Scripts\Fragment.cs" />
     <Compile Include="Assets\Scripts\Grenade.cs" />
     <Compile Include="Assets\Scripts\PlayerControlledRigidBodyPush.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerControllerSpawner.cs" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>/Users/daniellambert/Documents/TheOptomists/Grenade Physics/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>/Users/daniellambert/Documents/GitHub/TheOptomists/Grenade Physics/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>/Users/daniellambert/Documents/TheOptomists/Grenade Physics/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>/Users/daniellambert/Documents/GitHub/TheOptomists/Grenade Physics/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>/Users/daniellambert/Documents/TheOptomists/Grenade Physics/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>/Users/daniellambert/Documents/GitHub/TheOptomists/Grenade Physics/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>/Users/daniellambert/Documents/TheOptomists/Grenade Physics/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>/Users/daniellambert/Documents/GitHub/TheOptomists/Grenade Physics/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
