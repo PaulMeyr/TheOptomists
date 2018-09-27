@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.SceneManagement;
 [AddComponentMenu("Player Controller")]
 public class PlayerController : NetworkBehaviour
 {
@@ -21,18 +21,15 @@ public class PlayerController : NetworkBehaviour
     public Vector2 targetCharacterDirection;
     public Vector3 velocity = Vector3.zero;
     public Vector3 knockBackVel = Vector3.zero;
-    [SyncVar]
 
-    //heath
-    public  float health = 100;
+    [SyncVar(hook = "OnChangeHealth")]
+    public float health = 100;
     public const int maxHealth = 100;
     public bool destroyOnDeath;
-   [SyncVar(hook = "OnChangeHealth")]
+
     
     public RectTransform healthBar;
-    //heath
-  
-
+    
     private float grenadeWindUp = 0;
 
     // Assign this if there's a parent object controlling motion, such as a Character Controller.
@@ -44,15 +41,20 @@ public class PlayerController : NetworkBehaviour
     public Camera playerCamera = null;
 
 
-
-  
+    // weaponSwitching
+    public  int selectedWeapon = 0;
+    public int toldWeapons;
 
     void Start()
     {
         if (isLocalPlayer)
         
             {
-                spawnPoints = FindObjectsOfType<NetworkStartPosition>();
+           
+            if(GameObject.Find("Ui_ingame_Canvas") == null){
+                SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+            }
+            spawnPoints = FindObjectsOfType<NetworkStartPosition>();
             }
             targetDirection = transform.localRotation.eulerAngles;
         if (characterBody)
@@ -68,19 +70,7 @@ public class PlayerController : NetworkBehaviour
        
     }
 
-    //puts us back on the terrain if we fall off.
-	void resetPositionOnTerrain()
-	{
-		characterBody.GetComponent<CharacterController> ().enabled = false;
-		active = false;
-		Vector3 origin = characterBody.transform.position;
-		origin.y = 1000.0f;
-		Vector3 direction = new Vector3 (0, -1.0f, 0);
-		RaycastHit hit;
-		if (Physics.Raycast (origin, direction, out hit)) {
-			characterBody.transform.position = hit.point + new Vector3(0, 2, 0);
-		}
-	}
+  
 
     //currently unused
     /*
@@ -104,6 +94,7 @@ public class PlayerController : NetworkBehaviour
             {
                 Camera.main.enabled = false;
             }
+            
             playerCamera.enabled = true;
             playerCamera.tag = "MainCamera";
         }
@@ -141,10 +132,11 @@ public class PlayerController : NetworkBehaviour
             var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
             transform.localRotation *= yRotation;
         }
-
-		if (transform.position.y < -500) {
-			resetPositionOnTerrain ();
-		}
+        if (this.transform.position.y <= -3.6f)
+        {
+            RpcRespawn();
+        }
+      
 
 		CharacterController controller = characterBody.GetComponent<CharacterController>();
 		Vector3 forward = characterBody.transform.TransformDirection(Vector3.forward);
@@ -190,6 +182,26 @@ public class PlayerController : NetworkBehaviour
             if(controller.height>1.99f)
                 controller.height = 1.99f;
         }
+       
+        if(Input.GetAxis("Mouse ScrollWheel")>0f)
+        {
+
+            if (selectedWeapon >= toldWeapons - 1)
+                selectedWeapon = 0;
+            else
+                selectedWeapon++;
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+
+            if (selectedWeapon <= 0 )
+                selectedWeapon = toldWeapons - 1;
+            else
+                selectedWeapon--;
+        }
+       
+
         float sprintMult = 1.0f;
         if (Input.GetButton("Sprint"))
         {
@@ -212,14 +224,10 @@ public class PlayerController : NetworkBehaviour
 		}
        
     
-        //heath
-   
-        if (!isServer)
-            return;
-
        
         if (health <= 0)
         {
+            Debug.Log("Health dropped, respawn rcp?");
             if (destroyOnDeath)
             {
                 Destroy(gameObject);
@@ -227,7 +235,7 @@ public class PlayerController : NetworkBehaviour
             else
             {
                 health = maxHealth;
-
+                knockBackVel = Vector3.zero;
                 // called on the Server, invoked on the Clients
                 RpcRespawn();
             }
@@ -235,8 +243,9 @@ public class PlayerController : NetworkBehaviour
 
     }
     //heathbar
-    void OnChangeHealth(int health)
+    void OnChangeHealth(float health)
     {
+        this.health = health;
         healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
     }
 
@@ -257,11 +266,12 @@ public class PlayerController : NetworkBehaviour
 
             // Set the player’s position to the chosen spawn point
             transform.position = spawnPoint;
+            knockBackVel = Vector3.zero;
         }
     }
 
 
-    //TODO - BUG - figure out if this is even being called
+  
     public override void OnStartLocalPlayer()
     {
         GetComponent<MeshRenderer>().material.color = Color.blue;
@@ -276,4 +286,6 @@ public class PlayerController : NetworkBehaviour
             playerCamera.tag = "MainCamera";
         }
     }
+   
+
 }

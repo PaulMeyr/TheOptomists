@@ -63,7 +63,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1156242881668962
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
@@ -83,7 +83,7 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4142461669425840}
+  - component: {fileID: 224543646037401142}
   - component: {fileID: 33355148026230704}
   - component: {fileID: 23947766649018790}
   - component: {fileID: 136789868776603028}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 114563966665368540}
   - component: {fileID: 114469109544188702}
   - component: {fileID: 114662290307204884}
-  - component: {fileID: 114024473842108320}
+  - component: {fileID: 222051758957756370}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -129,24 +129,7 @@ Transform:
   m_LocalPosition: {x: -0.138, y: 0.587, z: 0.446}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
-  m_Father: {fileID: 4142461669425840}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4142461669425840
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1268293094871930}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.376274, y: 7.3696456, z: -0.17933393}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4095619157690472}
-  - {fileID: 4992140966488894}
-  - {fileID: 4451953284848720}
-  - {fileID: 4703011122676144}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 224543646037401142}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4411496865939566
@@ -168,12 +151,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1156242881668962}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0.5, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4142461669425840}
-  m_RootOrder: 2
+  m_Father: {fileID: 4703011122676144}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4703011122676144
 Transform:
@@ -186,8 +169,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4411496865939566}
-  m_Father: {fileID: 4142461669425840}
-  m_RootOrder: 3
+  - {fileID: 4451953284848720}
+  m_Father: {fileID: 224543646037401142}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4992140966488894
 Transform:
@@ -199,7 +183,7 @@ Transform:
   m_LocalPosition: {x: 0.166, y: 0.511, z: 0.44}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
-  m_Father: {fileID: 4142461669425840}
+  m_Father: {fileID: 224543646037401142}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20289228120682146
@@ -375,79 +359,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1111651621489576}
   m_Enabled: 0
---- !u!114 &114024473842108320
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1268293094871930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fe1779e09f406b4a865858dbc0393d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NetworkPort: 7777
-  m_ServerBindToIP: 0
-  m_ServerBindAddress: 
-  m_NetworkAddress: localhost
-  m_DontDestroyOnLoad: 1
-  m_RunInBackground: 1
-  m_ScriptCRCCheck: 1
-  m_MaxDelay: 0.01
-  m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 0}
-  m_AutoCreatePlayer: 1
-  m_PlayerSpawnMethod: 0
-  m_OfflineScene: 
-  m_OnlineScene: 
-  m_SpawnPrefabs: []
-  m_CustomConfig: 0
-  m_MaxConnections: 4
-  m_ConnectionConfig:
-    m_ResendTimeout: 1200
-    m_DisconnectTimeout: 2000
-    m_ConnectTimeout: 2000
-    m_MinUpdateTimeout: 10
-    m_PingTimeout: 500
-    m_ReducedPingTimeout: 100
-    m_AllCostTimeout: 20
-    m_NetworkDropThreshold: 5
-    m_OverflowDropThreshold: 5
-    m_MaxConnectionAttempt: 10
-    m_AckDelay: 33
-    m_SendDelay: 10
-    m_AcksType: 1
-    m_UsePlatformSpecificProtocols: 0
-    m_InitialBandwidth: 0
-    m_BandwidthPeakFactor: 2
-    m_UdpSocketReceiveBufferMaxSize: 0
-    m_SSLCertFilePath: 
-    m_SSLPrivateKeyFilePath: 
-    m_SSLCAFilePath: 
-    m_Channels: []
-  m_GlobalConfig:
-    m_ThreadAwakeTimeout: 1
-    m_ReactorModel: 0
-    m_ThreadPoolSize: 1
-    m_MinTimerTimeout: 1
-    m_MaxTimerTimeout: 12000
-    m_MinNetSimulatorTimeout: 1
-    m_MaxNetSimulatorTimeout: 12000
-  m_Channels: 
-  m_UseWebSockets: 0
-  m_UseSimulator: 0
-  m_SimulatedLatency: 1
-  m_PacketLossPercentage: 0
-  m_MaxBufferedPackets: 16
-  m_AllowFragmentation: 1
-  m_MatchHost: mm.unet.unity3d.com
-  m_MatchPort: 443
-  matchName: default
-  matchSize: 4
-  m_MigrationManager: {fileID: 0}
-  m_ClientLoadedScene: 0
-  isNetworkActive: 0
-  matchMaker: {fileID: 0}
 --- !u!114 &114162722709764222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -538,13 +449,14 @@ MonoBehaviour:
   knockBackVel: {x: 0, y: 0, z: 0}
   health: 100
   destroyOnDeath: 0
-  currentHealth: 100
   healthBar: {fileID: 0}
   characterBody: {fileID: 1268293094871930}
   characterEyes: {fileID: 1065411142697254}
   characterBodyIdentity: {fileID: 114251132136946766}
   objectSpawner: {fileID: 114563966665368540}
   playerCamera: {fileID: 20289228120682146}
+  selectedWeapon: 0
+  toldWeapons: 2
 --- !u!114 &114563966665368540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -559,6 +471,10 @@ MonoBehaviour:
   munitionSpawnLocation: {fileID: 4451953284848720}
   baseGrenadePrefab: {fileID: 1202565270900182, guid: 122d2826e82d50f4493afde8f6085e93,
     type: 2}
+  holygranagPrefab: {fileID: 1087970367963722, guid: 9a4176bd3a16b254c904f87712c4e2a8,
+    type: 2}
+  player: {fileID: 1268293094871930}
+  myWeaponis: 0
 --- !u!114 &114662290307204884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -620,3 +536,31 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!222 &222051758957756370
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1268293094871930}
+  m_CullTransparentMesh: 0
+--- !u!224 &224543646037401142
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1268293094871930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.17933393}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4095619157690472}
+  - {fileID: 4992140966488894}
+  - {fileID: 4703011122676144}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -28.376274, y: 7.3696456}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
