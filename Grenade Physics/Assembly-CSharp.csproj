@@ -61,11 +61,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\KnockBack.cs" />
     <Compile Include="Assets\Scripts\CopyPitchRotation.cs" />
     <Compile Include="Assets\Scripts\FragGrenade.cs" />
     <Compile Include="Assets\Scripts\Fragment.cs" />
     <Compile Include="Assets\Scripts\Grenade.cs" />
+    <Compile Include="Assets\Scripts\KnockBack.cs" />
     <Compile Include="Assets\Scripts\PlayerControlledRigidBodyPush.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerControllerSpawner.cs" />

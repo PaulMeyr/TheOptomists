@@ -450,6 +450,7 @@ MonoBehaviour:
   health: 100
   destroyOnDeath: 0
   healthBar: {fileID: 0}
+  Maxammo: 10
   characterBody: {fileID: 1268293094871930}
   characterEyes: {fileID: 1065411142697254}
   characterBodyIdentity: {fileID: 114251132136946766}

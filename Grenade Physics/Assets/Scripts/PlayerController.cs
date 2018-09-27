@@ -33,6 +33,8 @@ public class PlayerController : NetworkBehaviour
   
     private float grenadeWindUp = 0;
 
+    private float ammo;
+    public float Maxammo;
     // Assign this if there's a parent object controlling motion, such as a Character Controller.
     // Yaw rotation will affect this object instead of the camera if set.
     public GameObject characterBody = null;
@@ -48,6 +50,7 @@ public class PlayerController : NetworkBehaviour
 
     void Start()
     {
+      
         if (isLocalPlayer)
         
             {
@@ -57,6 +60,7 @@ public class PlayerController : NetworkBehaviour
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
             }
             targetDirection = transform.localRotation.eulerAngles;
+      
         if (characterBody)
         {
             targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
@@ -210,13 +214,26 @@ public class PlayerController : NetworkBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            grenadeWindUp += Time.deltaTime;
+            if (ammo >= 0)
+            {
+                grenadeWindUp += Time.deltaTime;
+               
+            }
+            
+           
         }
-
+        if(Input.GetKeyDown("r"))
+        {
+            ammo = Maxammo;
+        }
         if(Input.GetButtonUp("Fire1"))
         {
-            objectSpawner.Cmd_throwGrenade(grenadeWindUp);
-            grenadeWindUp = 0;
+            if (ammo >= 0)
+            {
+                objectSpawner.Cmd_throwGrenade(grenadeWindUp);
+                grenadeWindUp = 0;
+                ammo--;
+            }
         }
 
         if (active) {
