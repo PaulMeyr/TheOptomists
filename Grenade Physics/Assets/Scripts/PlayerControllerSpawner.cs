@@ -9,6 +9,7 @@ public class PlayerControllerSpawner : NetworkBehaviour
 
     public Transform munitionSpawnLocation = null;
     public GameObject baseGrenadePrefab = null;
+<<<<<<< HEAD
     public GameObject holygranagPrefab = null;
    private GameObject grenade = null;
     public GameObject player;
@@ -16,10 +17,18 @@ public class PlayerControllerSpawner : NetworkBehaviour
     // Use this for initialization
     void Start () {
 
+=======
+
+   
+    // Use this for initialization
+    void Start () {
+     
+>>>>>>> e0960c38485cebfc22f0bcf72ba28dea97b10f08
     }
 	
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
         if (!isLocalPlayer)
         {
             return;
@@ -31,6 +40,13 @@ public class PlayerControllerSpawner : NetworkBehaviour
   
 
 
+=======
+		
+	}
+  
+
+
+>>>>>>> e0960c38485cebfc22f0bcf72ba28dea97b10f08
 [Command]
     public void Cmd_throwGrenade(float cook)
     {

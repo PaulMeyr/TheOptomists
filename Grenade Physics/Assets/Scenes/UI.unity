@@ -38,7 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+=======
+  m_IndirectSpecularColor: {r: 0.3731196, g: 0.38074002, b: 0.35872713, a: 1}
+>>>>>>> e0960c38485cebfc22f0bcf72ba28dea97b10f08
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -124,7 +128,10 @@ GameObject:
   - component: {fileID: 403969567}
   - component: {fileID: 403969566}
   - component: {fileID: 403969565}
+<<<<<<< HEAD
   - component: {fileID: 403969569}
+=======
+>>>>>>> e0960c38485cebfc22f0bcf72ba28dea97b10f08
   m_Layer: 5
   m_Name: Ui_ingame_Canvas
   m_TagString: Untagged
@@ -200,7 +207,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1526607876}
+<<<<<<< HEAD
   - {fileID: 527045140}
+=======
+>>>>>>> e0960c38485cebfc22f0bcf72ba28dea97b10f08
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -209,6 +219,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+<<<<<<< HEAD
 --- !u!114 &403969569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +303,8 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 527045139}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> e0960c38485cebfc22f0bcf72ba28dea97b10f08
 --- !u!1 &1526607875
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +316,11 @@ GameObject:
   - component: {fileID: 1526607878}
   - component: {fileID: 1526607877}
   m_Layer: 5
+<<<<<<< HEAD
   m_Name: BaseGrenadeJPG
+=======
+  m_Name: Image
+>>>>>>> e0960c38485cebfc22f0bcf72ba28dea97b10f08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,7 +363,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+<<<<<<< HEAD
   m_Sprite: {fileID: 21300000, guid: ee2224df1b8eefd47b152bc5e31e3952, type: 3}
+=======
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+>>>>>>> e0960c38485cebfc22f0bcf72ba28dea97b10f08
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
