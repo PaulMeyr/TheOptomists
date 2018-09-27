@@ -29,12 +29,8 @@ public class PlayerController : NetworkBehaviour
 
     
     public RectTransform healthBar;
-    
-<<<<<<< HEAD
-=======
-  
 
->>>>>>> e0960c38485cebfc22f0bcf72ba28dea97b10f08
+  
     private float grenadeWindUp = 0;
 
     // Assign this if there's a parent object controlling motion, such as a Character Controller.
@@ -55,11 +51,6 @@ public class PlayerController : NetworkBehaviour
         if (isLocalPlayer)
         
             {
-<<<<<<< HEAD
-           
-=======
-
->>>>>>> e0960c38485cebfc22f0bcf72ba28dea97b10f08
             if(GameObject.Find("Ui_ingame_Canvas") == null){
                 SceneManager.LoadScene("UI", LoadSceneMode.Additive);
             }
