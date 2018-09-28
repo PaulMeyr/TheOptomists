@@ -170,3 +170,7 @@ C:/Users/dr.fox/Desktop/Grenade Physics/obj/Debug/Assembly-CSharp.pdb
 /Users/brycerobinson920/Desktop/Grenade Physics/obj/Debug/Assembly-CSharp.csproj.CoreCompileInputs.cache
 /Users/brycerobinson920/Desktop/Grenade Physics/obj/Debug/Assembly-CSharp.dll
 /Users/brycerobinson920/Desktop/Grenade Physics/obj/Debug/Assembly-CSharp.pdb
+C:\Users\Brycerobinson920\Desktop\Grenade Physics\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\Brycerobinson920\Desktop\Grenade Physics\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+C:\Users\Brycerobinson920\Desktop\Grenade Physics\obj\Debug\Assembly-CSharp.dll
+C:\Users\Brycerobinson920\Desktop\Grenade Physics\obj\Debug\Assembly-CSharp.pdb

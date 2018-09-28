@@ -263,7 +263,7 @@ public class PlayerController : NetworkBehaviour
     void OnChangeHealth(float health)
     {
         this.health = health;
-        healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+       // healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
     }
 
     //respawning

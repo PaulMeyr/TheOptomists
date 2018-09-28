@@ -10,12 +10,13 @@ public class ui : NetworkBehaviour
     private int myWeaponis;
    private int toldWeapon;
     public GameObject player;
+ 
     // Use this for initialization
     void Start()
     {
         BaseGrenadeJPG.enabled = false;
         holygranagJPG.enabled = false;
-
+       
     }
 
     // Update is called once per frame
@@ -45,11 +46,14 @@ public class ui : NetworkBehaviour
         {
             BaseGrenadeJPG.enabled = true;
             holygranagJPG.enabled = false;
+            
         }
         if (myWeaponis == 1)
         {
             BaseGrenadeJPG.enabled = false;
             holygranagJPG.enabled = true;
+          
         }
+       
     }
 }
