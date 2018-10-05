@@ -8,7 +8,7 @@ public class ui : NetworkBehaviour
     public Image BaseGrenadeJPG, holygranagJPG;
 
     private int myWeaponis;
-   private int toldWeapon;
+    private int toldWeapon;
     public GameObject player;
  
     // Use this for initialization
@@ -22,7 +22,7 @@ public class ui : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+       //TODO We should have an array or list of grenade objects, this isn't easily expandable and is bad practice. - Dan
         toldWeapon = player.GetComponent<PlayerController>().toldWeapons;
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {

@@ -30,9 +30,9 @@ public class PlayerController : NetworkBehaviour
     
     public RectTransform healthBar;
 
-  
+    [SyncVar]
     private float grenadeWindUp = 0;
-
+    //TODO We have multiple types of grenades that share one ammo variable? Eh?
     private float ammo;
     public float Maxammo;
     // Assign this if there's a parent object controlling motion, such as a Character Controller.
@@ -212,16 +212,12 @@ public class PlayerController : NetworkBehaviour
             sprintMult = 1.5f;
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
-            if (ammo >= 0)
-            {
-                grenadeWindUp += Time.deltaTime;
-               
-            }
-            
-           
+            grenadeWindUp += Time.deltaTime;
         }
+
+        //TODO Magic grenade reloading!
         if(Input.GetKeyDown("r"))
         {
             ammo = Maxammo;
@@ -231,9 +227,10 @@ public class PlayerController : NetworkBehaviour
             if (ammo >= 0)
             {
                 objectSpawner.Cmd_throwGrenade(grenadeWindUp);
-                grenadeWindUp = 0;
+                Debug.Log(grenadeWindUp);
                 ammo--;
             }
+            grenadeWindUp = 0;
         }
 
         if (active) {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44800174, g: 0.49384773, b: 0.55315226, a: 1}
+  m_IndirectSpecularColor: {r: 0.4480018, g: 0.4938478, b: 0.55315214, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1701,7 +1701,7 @@ GameObject:
   - component: {fileID: 1098469624}
   - component: {fileID: 1098469623}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Directional Light AND Network Controller(WHY?)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

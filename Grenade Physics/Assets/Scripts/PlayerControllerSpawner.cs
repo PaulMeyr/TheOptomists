@@ -11,14 +11,12 @@ public class PlayerControllerSpawner : NetworkBehaviour
     public GameObject baseGrenadePrefab = null;
 
     public GameObject holygranagPrefab = null;
-   private GameObject grenade = null;
+    private GameObject grenade = null;
     public GameObject player;
-   public int myWeaponis;
+    public int myWeaponis;
+
     // Use this for initialization
     void Start() {
-
-
-
 
     }
 	
@@ -43,10 +41,9 @@ public class PlayerControllerSpawner : NetworkBehaviour
 [Command]
     public void Cmd_throwGrenade(float cook)
     {
-
+        //Switch/case?
         if (myWeaponis == 0)
         {
-        
            grenade = (GameObject)Instantiate(baseGrenadePrefab, munitionSpawnLocation.position, munitionSpawnLocation.rotation);
         }
         if (myWeaponis == 1)

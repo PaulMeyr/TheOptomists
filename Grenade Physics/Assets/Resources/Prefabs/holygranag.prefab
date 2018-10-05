@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 54017420715047206}
   - component: {fileID: 114592350588128754}
   - component: {fileID: 114434367490920840}
-  - component: {fileID: 114087855888711352}
   - component: {fileID: 114546727095936486}
   m_Layer: 0
   m_Name: holygranag
@@ -177,23 +176,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 0e75f9d0ebf3db0429ac875c7d1c459b, type: 3}
---- !u!114 &114087855888711352
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1087970367963722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2867ba0af9315de49bf77ab2660b744b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fuseTime: 5
-  lifeTime: 0
-  damage: 100
-  knockBackForce: 10
-  damageRadius: 10
-  isContactTriggered: 0
 --- !u!114 &114434367490920840
 MonoBehaviour:
   m_ObjectHideFlags: 1
