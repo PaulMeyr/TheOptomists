@@ -45,7 +45,7 @@ public class PlayerController : NetworkBehaviour
 
 
     // weaponSwitching
-    public  int selectedWeapon = 0;
+   
     public int toldWeapons;
 
     void Start()
@@ -187,23 +187,6 @@ public class PlayerController : NetworkBehaviour
                 controller.height = 1.99f;
         }
        
-        if(Input.GetAxis("Mouse ScrollWheel")>0f)
-        {
-
-            if (selectedWeapon >= toldWeapons - 1)
-                selectedWeapon = 0;
-            else
-                selectedWeapon++;
-        }
-
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-
-            if (selectedWeapon <= 0 )
-                selectedWeapon = toldWeapons - 1;
-            else
-                selectedWeapon--;
-        }
        
 
         float sprintMult = 1.0f;
@@ -227,7 +210,7 @@ public class PlayerController : NetworkBehaviour
             if (ammo >= 0)
             {
                 objectSpawner.Cmd_throwGrenade(grenadeWindUp);
-                Debug.Log(grenadeWindUp);
+//                Debug.Log(grenadeWindUp);
                 ammo--;
             }
             grenadeWindUp = 0;
