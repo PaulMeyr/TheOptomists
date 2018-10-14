@@ -1,6 +1,6 @@
 OSXStandalone
 PlayerPath?
-/Users/brycerobinson920/Desktop/Grenade Physics/test2.app
+C:/Dev/TheOptomists/Grenade Physics/Build.app
 SceneListBegin?
 Assets/Scenes/CharacterControllerTest.unity
 Assets/Scenes/UI.unity
