@@ -1,6 +1,6 @@
 OSXStandalone
 PlayerPath?
-C:/Dev/TheOptomists/Grenade Physics/Build.app
+/Users/brycerobinson920/Desktop/Grenade Physics/text2.3.app
 SceneListBegin?
 Assets/Scenes/CharacterControllerTest.unity
 Assets/Scenes/UI.unity
@@ -155,7 +155,7 @@ e033f131358cea5a0eabf9561e781deb UnityEngine.TestRunner.dll:UnityEngine.TestTool
 70f7dc248db3379548a88e8d4fa049f8 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
-621fc1627e0d7920124a34901ea81ae4 Assembly-CSharp.dll:.PlayerController
+778e53ceff02157004ab9c9d636eaa99 Assembly-CSharp.dll:.PlayerController
 1a90b221dc803408fbafa883c12bcab4 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
 70f7dc248db3379548a88e8d4fa049f8 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension

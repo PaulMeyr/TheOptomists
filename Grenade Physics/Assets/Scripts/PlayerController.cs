@@ -27,12 +27,15 @@ public class PlayerController : NetworkBehaviour
     public const int maxHealth = 100;
     public bool destroyOnDeath;
 
-    
+    public int TimeTellThown = 0;
+
     public RectTransform healthBar;
 
     [SyncVar]
     private float grenadeWindUp = 0;
     //TODO We have multiple types of grenades that share one ammo variable? Eh?
+ 
+
     private float ammo;
     public float Maxammo;
     // Assign this if there's a parent object controlling motion, such as a Character Controller.
@@ -195,32 +198,40 @@ public class PlayerController : NetworkBehaviour
             sprintMult = 1.5f;
         }
 
-        if (Input.GetButton("Fire1"))
-        {
-            grenadeWindUp += Time.deltaTime;
-        }
+       
 
         //TODO Magic grenade reloading!
         if(Input.GetKeyDown("r"))
         {
             ammo = Maxammo;
         }
-        if(Input.GetButtonUp("Fire1"))
+        if (TimeTellThown == 0)
         {
-            if (ammo >= 0)
+            if (Input.GetButtonUp("Fire1"))
             {
-                objectSpawner.Cmd_throwGrenade(grenadeWindUp);
-//                Debug.Log(grenadeWindUp);
-                ammo--;
+                if (ammo >= 0)
+                {
+                    TimeTellThown = 100;
+                    objectSpawner.Cmd_throwGrenade(grenadeWindUp);
+                    //              Debug.Log(grenadeWindUp);
+                    ammo--;
+                }
+                grenadeWindUp = 0;
             }
-            grenadeWindUp = 0;
-        }
 
+            if (Input.GetButton("Fire1"))
+            {
+                grenadeWindUp += Time.deltaTime;
+
+            }
+        }
         if (active) {
 			controller.Move (((forward * curSpeedV * crouchMult * sprintMult) + (right * curSpeedH * crouchMult) + velocity + knockBackVel) * Time.deltaTime);
 		}
        
-    
+        if(TimeTellThown != 0){
+            TimeTellThown--;
+        }
        
         if (health <= 0)
         {
@@ -239,8 +250,9 @@ public class PlayerController : NetworkBehaviour
         }
 
     }
-    //heathbar
-    void OnChangeHealth(float health)
+   
+        //heathbar
+        void OnChangeHealth(float health)
     {
         this.health = health;
        // healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
