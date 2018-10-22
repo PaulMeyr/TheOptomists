@@ -141,7 +141,7 @@ public class PlayerController : NetworkBehaviour
         }
         if (this.transform.position.y <= -3.6f)
         {
-            Rpc_Respawn();
+            Cmd_Respawn();
         }
       
 
