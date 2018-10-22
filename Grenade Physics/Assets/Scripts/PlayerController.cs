@@ -141,7 +141,7 @@ public class PlayerController : NetworkBehaviour
         }
         if (this.transform.position.y <= -3.6f)
         {
-            RpcRespawn();
+            Rpc_Respawn();
         }
       
 
@@ -242,41 +242,49 @@ public class PlayerController : NetworkBehaviour
             }
             else
             {
-                health = maxHealth;
+               
                 knockBackVel = Vector3.zero;
                 // called on the Server, invoked on the Clients
-                RpcRespawn();
+                Cmd_Respawn();
             }
         }
 
     }
-   
-        //heathbar
-        void OnChangeHealth(float health)
+
+
+    //heathbar
+    void OnChangeHealth(float health)
     {
         this.health = health;
-       // healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+        // healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
     }
+
 
     //respawning
     [ClientRpc]
-    void RpcRespawn()
+
+    public void Rpc_Respawn()
     {
-        if (isLocalPlayer)
+        health = maxHealth;
+        // Set the spawn point to origin as a default value
+        Vector3 spawnPoint = Vector3.zero;
+
+        // If there is a spawn point array and the array is not empty, pick one at random
+        if (spawnPoints != null && spawnPoints.Length > 0)
         {
-            // Set the spawn point to origin as a default value
-            Vector3 spawnPoint = Vector3.zero;
-
-            // If there is a spawn point array and the array is not empty, pick one at random
-            if (spawnPoints != null && spawnPoints.Length > 0)
-            {
-                spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
-            }
-
-            // Set the player’s position to the chosen spawn point
-            transform.position = spawnPoint;
-            knockBackVel = Vector3.zero;
+            spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
         }
+
+        // Set the player’s position to the chosen spawn point
+        transform.position = spawnPoint;
+        knockBackVel = Vector3.zero;
+
+    }
+    [Command]
+    public void Cmd_Respawn()
+    {
+        Rpc_Respawn();
+        health = maxHealth;
     }
 
 

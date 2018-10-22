@@ -10,7 +10,7 @@ public class Grenade : NetworkBehaviour {
 
     public float fuseTime = 5.0f; //the amount of time we can live before going boom.
     public float lifeTime = 0; // the amount of time we have lived.
-    public float damage = 100.0f;
+    public float damage = 10.0f;
     public float knockBackForce = 10.0f;
     public float damageRadius = 10.0f;
     public bool isContactTriggered = false;
