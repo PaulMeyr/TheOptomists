@@ -8,8 +8,8 @@ public class PlayerController : NetworkBehaviour
 {
     private NetworkStartPosition[] spawnPoints;
     public bool active = false;
-	public float speed = 2.0f;
-	public float rotateSpeed = 3.0f;
+    public float speed = 2.0f;
+    public float rotateSpeed = 3.0f;
     public float knockBackFalloffRate = 1.00f;
     Vector2 _mouseAbsolute;
     Vector2 _smoothMouse;
@@ -25,8 +25,8 @@ public class PlayerController : NetworkBehaviour
     [SyncVar(hook = "OnChangeHealth")]
     public float health = 100;
     public const int maxHealth = 100;
-    public bool destroyOnDeath;
-
+    public bool destroyOnDeath = true;
+    public bool dethcam;
     public int TimeTellThown = 0;
 
     public RectTransform healthBar;
@@ -34,7 +34,7 @@ public class PlayerController : NetworkBehaviour
     [SyncVar]
     private float grenadeWindUp = 0;
     //TODO We have multiple types of grenades that share one ammo variable? Eh?
- 
+
 
     private float ammo;
     public float Maxammo;
@@ -48,22 +48,24 @@ public class PlayerController : NetworkBehaviour
 
 
     // weaponSwitching
-   
+
     public int toldWeapons;
 
     void Start()
     {
-      
+
         if (isLocalPlayer)
-        
+
+        {
+            if (GameObject.Find("Ui_ingame_Canvas") == null)
             {
-            if(GameObject.Find("Ui_ingame_Canvas") == null){
                 SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+                destroyOnDeath = true;
             }
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
-            }
-            targetDirection = transform.localRotation.eulerAngles;
-      
+        }
+        targetDirection = transform.localRotation.eulerAngles;
+
         if (characterBody)
         {
             targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
@@ -74,10 +76,10 @@ public class PlayerController : NetworkBehaviour
             if (objectSpawner == null)
                 Debug.LogError("Character Body did not have a PlayerControllerSpawner.");
         }
-       
+
     }
 
-  
+
 
     //currently unused
     /*
@@ -89,19 +91,19 @@ public class PlayerController : NetworkBehaviour
 
     void Update()
     {
-      
+
         if (!characterBodyIdentity.isLocalPlayer)
         {
             return;
         }
-   
+
         if (!playerCamera.enabled)
         {
             if (Camera.main != null)
             {
                 Camera.main.enabled = false;
             }
-            
+
             playerCamera.enabled = true;
             playerCamera.tag = "MainCamera";
         }
@@ -120,14 +122,14 @@ public class PlayerController : NetworkBehaviour
         _smoothMouse.x = Mathf.Lerp(_smoothMouse.x, mouseDelta.x, 1f / smoothing.x);
         _smoothMouse.y = Mathf.Lerp(_smoothMouse.y, mouseDelta.y, 1f / smoothing.y);
         _mouseAbsolute += _smoothMouse;
- 
+
         if (clampInDegrees.x < 360)
             _mouseAbsolute.x = Mathf.Clamp(_mouseAbsolute.x, -clampInDegrees.x * 0.5f, clampInDegrees.x * 0.5f);
         if (clampInDegrees.y < 360)
             _mouseAbsolute.y = Mathf.Clamp(_mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
 
         characterEyes.transform.localRotation = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right) * targetOrientation;
- 
+
         // If there's a character body that acts as a parent to the camera
         if (characterBody)
         {
@@ -143,13 +145,13 @@ public class PlayerController : NetworkBehaviour
         {
             Cmd_Respawn();
         }
-      
 
-		CharacterController controller = characterBody.GetComponent<CharacterController>();
-		Vector3 forward = characterBody.transform.TransformDirection(Vector3.forward);
-		Vector3 right = characterBody.transform.TransformDirection(Vector3.right);
-		Vector3 jump = Vector3.zero;
-		float gravity = 9.8f;
+
+        CharacterController controller = characterBody.GetComponent<CharacterController>();
+        Vector3 forward = characterBody.transform.TransformDirection(Vector3.forward);
+        Vector3 right = characterBody.transform.TransformDirection(Vector3.right);
+        Vector3 jump = Vector3.zero;
+        float gravity = 9.8f;
         velocity -= velocity * Time.deltaTime;
         velocity.y -= gravity * Time.deltaTime;
 
@@ -162,35 +164,35 @@ public class PlayerController : NetworkBehaviour
         //constant knockback falloff (air resistance)
         knockBackVel *= 1.0f - (knockBackFalloffRate * Time.deltaTime);
 
-        if (controller.isGrounded&&Input.GetButton("Jump"))
-		{
+        if (controller.isGrounded && Input.GetButton("Jump"))
+        {
             //give it a little leap in the direction we are moving.
             velocity.x *= 1.5f;
             velocity.z *= 1.5f;
 
-            velocity.y=6.0f;
-		}
+            velocity.y = 6.0f;
+        }
 
 
 
-		float curSpeedV = speed * Input.GetAxis("Vertical");
-		float curSpeedH = speed * Input.GetAxis("Horizontal");
+        float curSpeedV = speed * Input.GetAxis("Vertical");
+        float curSpeedH = speed * Input.GetAxis("Horizontal");
         float crouchMult = 1.0f;
-        if(Input.GetButton("Crouch"))
+        if (Input.GetButton("Crouch"))
         {
             crouchMult = 0.25f;
-            controller.height -= 10.0f*Time.deltaTime;
+            controller.height -= 10.0f * Time.deltaTime;
             if (controller.height < 0.99f)
                 controller.height = 0.99f;
         }
         else
         {
             controller.height += 10.0f * Time.deltaTime;
-            if(controller.height>1.99f)
+            if (controller.height > 1.99f)
                 controller.height = 1.99f;
         }
-       
-       
+
+
 
         float sprintMult = 1.0f;
         if (Input.GetButton("Sprint"))
@@ -198,51 +200,57 @@ public class PlayerController : NetworkBehaviour
             sprintMult = 1.5f;
         }
 
-       
 
-        //TODO Magic grenade reloading!
-        if(Input.GetKeyDown("r"))
+        if (dethcam == false)
         {
-            ammo = Maxammo;
-        }
-        if (TimeTellThown == 0)
-        {
-            if (Input.GetButtonUp("Fire1"))
+            //TODO Magic grenade reloading!
+            if (Input.GetKeyDown("r"))
             {
-                if (ammo >= 0)
+                ammo = Maxammo;
+            }
+            if (TimeTellThown == 0)
+            {
+                if (Input.GetButtonUp("Fire1"))
                 {
-                    TimeTellThown = 100;
-                    objectSpawner.Cmd_throwGrenade(grenadeWindUp);
-                    //              Debug.Log(grenadeWindUp);
-                    ammo--;
+                    if (ammo >= 0)
+                    {
+                        TimeTellThown = 100;
+                        objectSpawner.Cmd_throwGrenade(grenadeWindUp);
+                        //              Debug.Log(grenadeWindUp);
+                        ammo--;
+                    }
+                    grenadeWindUp = 0;
                 }
-                grenadeWindUp = 0;
-            }
 
-            if (Input.GetButton("Fire1"))
+                if (Input.GetButton("Fire1"))
+                {
+                    grenadeWindUp += Time.deltaTime;
+
+                }
+            }
+        }
+        if (active)
+        {
+            controller.Move(((forward * curSpeedV * crouchMult * sprintMult) + (right * curSpeedH * crouchMult) + velocity + knockBackVel) * Time.deltaTime);
+        }
+        if (dethcam == false)
+        {
+            if (TimeTellThown != 0)
             {
-                grenadeWindUp += Time.deltaTime;
-
+                TimeTellThown--;
             }
         }
-        if (active) {
-			controller.Move (((forward * curSpeedV * crouchMult * sprintMult) + (right * curSpeedH * crouchMult) + velocity + knockBackVel) * Time.deltaTime);
-		}
-       
-        if(TimeTellThown != 0){
-            TimeTellThown--;
-        }
-       
         if (health <= 0)
         {
             Debug.Log("Health dropped, respawn rcp?");
             if (destroyOnDeath)
             {
-                Destroy(gameObject);
+                knockBackVel = Vector3.zero;
+                Cmd_deathcam();
             }
             else
             {
-               
+
                 knockBackVel = Vector3.zero;
                 // called on the Server, invoked on the Clients
                 Cmd_Respawn();
@@ -265,6 +273,9 @@ public class PlayerController : NetworkBehaviour
 
     public void Rpc_Respawn()
     {
+        dethcam = false;
+        GetComponent<MeshRenderer>().enabled = true;
+        gameObject.layer = 10;
         health = maxHealth;
         // Set the spawn point to origin as a default value
         Vector3 spawnPoint = Vector3.zero;
@@ -283,12 +294,25 @@ public class PlayerController : NetworkBehaviour
     [Command]
     public void Cmd_Respawn()
     {
+       
         Rpc_Respawn();
         health = maxHealth;
     }
 
+    [ClientRpc]
+    public void Rpc_deathcam()
 
-  
+    {
+        dethcam = true;
+        StartCoroutine(respawningdeath());
+        GetComponent<MeshRenderer>().enabled = false;
+        gameObject.layer = 9;
+    }
+    [Command]
+    public void Cmd_deathcam()
+    {
+        Rpc_deathcam();
+    }
     public override void OnStartLocalPlayer()
     {
         GetComponent<MeshRenderer>().material.color = Color.blue;
@@ -303,6 +327,14 @@ public class PlayerController : NetworkBehaviour
             playerCamera.tag = "MainCamera";
         }
     }
-   
 
+        IEnumerator respawningdeath()
+        {
+            yield return new WaitForSeconds(5);
+        if (health <= 0)
+        {
+            Cmd_Respawn();
+        }
+    }
+    
 }

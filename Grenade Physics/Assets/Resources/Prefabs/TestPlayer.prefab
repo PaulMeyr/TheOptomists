@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33139364015912276}
   - component: {fileID: 23168132390727310}
   - component: {fileID: 114162722709764222}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4703011122676144}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CameraHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4411496865939566}
   - component: {fileID: 20289228120682146}
   - component: {fileID: 81651839984196782}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4451953284848720}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ThrowTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 114469109544188702}
   - component: {fileID: 114662290307204884}
   - component: {fileID: 222051758957756370}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TestPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 33982142500380514}
   - component: {fileID: 23625551097886942}
   - component: {fileID: 114900205428677568}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,6 +449,7 @@ MonoBehaviour:
   knockBackVel: {x: 0, y: 0, z: 0}
   health: 100
   destroyOnDeath: 0
+  TimeTellThown: 0
   healthBar: {fileID: 0}
   Maxammo: 10
   characterBody: {fileID: 1268293094871930}
@@ -456,7 +457,6 @@ MonoBehaviour:
   characterBodyIdentity: {fileID: 114251132136946766}
   objectSpawner: {fileID: 114563966665368540}
   playerCamera: {fileID: 20289228120682146}
-  selectedWeapon: 0
   toldWeapons: 2
 --- !u!114 &114563966665368540
 MonoBehaviour:
