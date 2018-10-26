@@ -89,7 +89,7 @@ public class PlayerControllerSpawner : NetworkBehaviour
                 grenade = (GameObject)Instantiate(holygranagPrefab, munitionSpawnLocation.position, munitionSpawnLocation.rotation);
             }
 
-            grenade.GetComponent<Rigidbody>().velocity = grenade.transform.forward * (1.0f + cook) * 10.0f;
+            grenade.GetComponent<Rigidbody>().velocity = grenade.transform.forward * (1.0f + cook) * 15.0f;
             grenade.GetComponent<Grenade>().lifeTime += cook;//we cooked the grenade a bit.
             if (NetworkServer.active)
             {
