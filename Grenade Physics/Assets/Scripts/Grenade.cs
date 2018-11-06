@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class Grenade : NetworkBehaviour {
 
-    private bool hasTriggered = false;
+    public bool hasTriggered = false;
     
 
     public float fuseTime = 5.0f; //the amount of time we can live before going boom.
