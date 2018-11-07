@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114992459116980246}
   - component: {fileID: 114984916405844314}
   - component: {fileID: 114950096916401988}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BaseGrenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2867ba0af9315de49bf77ab2660b744b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTriggered: 0
   fuseTime: 5
   lifeTime: 0
   damage: 100

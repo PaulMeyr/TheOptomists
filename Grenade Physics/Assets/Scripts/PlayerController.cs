@@ -45,7 +45,7 @@ public class PlayerController : NetworkBehaviour
     public NetworkIdentity characterBodyIdentity = null;
     public PlayerControllerSpawner objectSpawner = null;
     public Camera playerCamera = null;
-
+    public GameObject eyes;
 
     // weaponSwitching
 
@@ -275,6 +275,7 @@ public class PlayerController : NetworkBehaviour
     {
         dethcam = false;
         GetComponent<MeshRenderer>().enabled = true;
+        eyes.SetActive(true);
         gameObject.layer = 10;
         health = maxHealth;
         // Set the spawn point to origin as a default value
@@ -306,6 +307,7 @@ public class PlayerController : NetworkBehaviour
         dethcam = true;
         StartCoroutine(respawningdeath());
         GetComponent<MeshRenderer>().enabled = false;
+        eyes.SetActive(false);
         gameObject.layer = 9;
     }
     [Command]
