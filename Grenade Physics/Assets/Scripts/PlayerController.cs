@@ -29,7 +29,7 @@ public class PlayerController : NetworkBehaviour
     public bool dethcam;
     public int TimeTellThown = 0;
 
-    public RectTransform healthBar;
+  
 
     [SyncVar]
     private float grenadeWindUp = 0;
@@ -96,7 +96,7 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
-
+      
         if (!playerCamera.enabled)
         {
             if (Camera.main != null)
@@ -264,9 +264,9 @@ public class PlayerController : NetworkBehaviour
     void OnChangeHealth(float health)
     {
         this.health = health;
-        // healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
-    }
 
+    }
+  
 
     //respawning
     [ClientRpc]

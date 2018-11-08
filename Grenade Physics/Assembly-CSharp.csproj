@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\bloodfadeing.cs" />
     <Compile Include="Assets\Scripts\CopyPitchRotation.cs" />
     <Compile Include="Assets\Scripts\FragGrenade.cs" />
     <Compile Include="Assets\Scripts\Fragment.cs" />
