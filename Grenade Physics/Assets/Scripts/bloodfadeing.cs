@@ -2,32 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class bloodfadeing : MonoBehaviour {
+public class bloodfadeing : NetworkBehaviour
+{
 
     public Image blood;
     public float fadeTime = 3.0f;
     public float bloodAmunt, fadeinblood = 0, Amunt;
     public float heath;
+    private GameObject player;
     void Update()
     {
+       
+        player = GameObject.Find("TestPlayer(Clone)");
 
-
-        bloodAmunt = ((100 - heath) * 0.0007f);
-        if (fadeinblood < bloodAmunt && fadeinblood <= 0.07f)
+        bloodAmunt = ((100 - heath) * 0.007f);
+        if (fadeinblood < bloodAmunt && fadeinblood <= 0.7f)
         {
             fadeinblood += Amunt;
         }
         if (fadeinblood > bloodAmunt) {
             fadeinblood -= Amunt;
         }
-          
-    
-    
-       if(fadeinblood< 0){
+
+        heath = player.GetComponentInChildren<PlayerController>().health;
+
+        if (fadeinblood< 0){
          blood.enabled = false;
         }
-        if (bloodAmunt >= 0.07)
+        if (bloodAmunt >= 0.7)
         {
             fadeinblood = 0;
             blood.enabled = false;
@@ -56,4 +60,6 @@ public class bloodfadeing : MonoBehaviour {
         bloodColor.a = fadeinblood;
         blood.color = bloodColor;
     }
+
+  
 }

@@ -256,14 +256,27 @@ public class PlayerController : NetworkBehaviour
                 Cmd_Respawn();
             }
         }
+        if(health>100){
+            StartCoroutine(bloodlower());
+        }
 
     }
 
-
-    //heathbar
-    void OnChangeHealth(float health)
+    IEnumerator bloodlower()
     {
-        this.health = health;
+        yield return new WaitForSeconds(10.0f);
+        if (health > 100)
+        {
+            health -= 1;
+            yield return 0;
+        }
+       
+    }
+
+        //heathbar
+        void OnChangeHealth(float Health)
+    {
+        this.health = Health;
 
     }
   

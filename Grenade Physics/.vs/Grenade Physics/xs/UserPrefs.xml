@@ -1,9 +1,10 @@
 ﻿<Properties StartupConfiguration="{165BD172-CA53-47D5-0A70-37FAEDE8A3BD}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerControllerSpawner.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerController.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="248" Column="14" />
-      <File FileName="Assets/Scripts/PlayerControllerSpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/bloodfadeing.cs" Line="47" Column="9" />
+      <File FileName="Assets/Scripts/HethGrenade.cs" Line="21" Column="8" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="265" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

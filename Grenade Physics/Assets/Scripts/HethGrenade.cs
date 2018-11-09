@@ -18,10 +18,7 @@ public class HethGrenade : Grenade
     // Update is called once per frame
     void Update()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
+       
         if (fuseTime <= lifeTime)
         {
             hasTriggered = true;
@@ -128,7 +125,7 @@ public class HethGrenade : Grenade
                 takerPC.knockBackVel += (taker.transform.position - gameObject.transform.position) * knockBackForce * distRatio;
                 if (isServer)
                 {
-                    if (takerPC.health <= 200)
+                    if (takerPC.health <= 150)
                     {
                         takerPC.health += damage;
                     }
