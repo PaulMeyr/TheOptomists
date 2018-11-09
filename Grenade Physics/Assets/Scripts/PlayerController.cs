@@ -240,24 +240,30 @@ public class PlayerController : NetworkBehaviour
                 TimeTellThown--;
             }
         }
-        if (health <= 0)
+        if (dethcam == true)
         {
-            Debug.Log("Health dropped, respawn rcp?");
-            if (destroyOnDeath)
-            {
-                knockBackVel = Vector3.zero;
-                Cmd_deathcam();
-            }
-            else
-            {
-
-                knockBackVel = Vector3.zero;
-                // called on the Server, invoked on the Clients
-                Cmd_Respawn();
-            }
+            health = 0;
         }
-        if(health>100){
-            StartCoroutine(bloodlower());
+            if (health <= 0)
+            {
+                Debug.Log("Health dropped, respawn rcp?");
+                if (destroyOnDeath)
+                {
+                    knockBackVel = Vector3.zero;
+                    Cmd_deathcam();
+                }
+                else
+                {
+
+                    knockBackVel = Vector3.zero;
+                    // called on the Server, invoked on the Clients
+                    Cmd_Respawn();
+                }
+            
+            if (health > 100)
+            {
+                StartCoroutine(bloodlower());
+            }
         }
 
     }
@@ -276,7 +282,9 @@ public class PlayerController : NetworkBehaviour
         //heathbar
         void OnChangeHealth(float Health)
     {
-        this.health = Health;
+       
+            this.health = Health;
+
 
     }
   

@@ -421,7 +421,3 @@ C:/Users/Brycerobinson920/Desktop/Grenade Physics/obj/Debug/Assembly-CSharp.pdb
 /Users/brycerobinson920/Desktop/Grenade Physics/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
 /Users/brycerobinson920/Desktop/Grenade Physics/Temp/bin/Debug/Unity.IvyParser.dll.mdb
 /Users/brycerobinson920/Desktop/Grenade Physics/obj/Debug/Assembly-CSharp.csproj.CopyComplete
-C:\Users\dr.fox\Desktop\Grenade Physics\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-C:\Users\dr.fox\Desktop\Grenade Physics\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
-C:\Users\dr.fox\Desktop\Grenade Physics\obj\Debug\Assembly-CSharp.dll
-C:\Users\dr.fox\Desktop\Grenade Physics\obj\Debug\Assembly-CSharp.pdb

@@ -6,6 +6,7 @@ public class HethGrenade : Grenade
 {
     private float dicstans;
     public GameObject heththing;
+    public bool death;
     // Use this for initialization
     void Start()
     {
@@ -13,6 +14,7 @@ public class HethGrenade : Grenade
         fuseTime = 0;
         knockBackForce = 0;
         damageRadius = 0.5f;
+        death = false;
     }
 
     // Update is called once per frame
@@ -67,79 +69,91 @@ public class HethGrenade : Grenade
     [ClientRpc]
     public void Rpc_loadHeth()
     {
-        heththing.SetActive(false);
-        damageRadius = 10;
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, damageRadius);
-        int i = 0;
-        while (i < hitColliders.Length)
+        if (death == false)
         {
-            GameObject taker = hitColliders[i].gameObject;
-            PlayerController takerPC = taker.GetComponentInChildren<PlayerController>();
-            Rigidbody takerRB = taker.GetComponent<Rigidbody>();
-            if (takerRB == null && takerPC == null)
+            heththing.SetActive(false);
+        }
+            damageRadius = 10;
+            Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, damageRadius);
+            int i = 0;
+            while (i < hitColliders.Length)
             {
-                i++;
-                continue;//short circuit to the next object since we aren't going to do anything.
-            }
-            dicstans= (damageRadius - (taker.transform.position - gameObject.transform.position).magnitude) / damageRadius;
-            float distRatio = (damageRadius - (taker.transform.position - gameObject.transform.position).magnitude) / damageRadius;
-            if (takerPC != null)
-            {
+                GameObject taker = hitColliders[i].gameObject;
+                PlayerController takerPC = taker.GetComponentInChildren<PlayerController>();
+                Rigidbody takerRB = taker.GetComponent<Rigidbody>();
+                
+                if (takerRB == null && takerPC == null)
+                {
+                    i++;
+                    continue;//short circuit to the next object since we aren't going to do anything.
+                }
+                dicstans = (damageRadius - (taker.transform.position - gameObject.transform.position).magnitude) / damageRadius;
+                float distRatio = (damageRadius - (taker.transform.position - gameObject.transform.position).magnitude) / damageRadius;
+                if (takerPC != null)
+                {
+                death = takerPC.GetComponent<PlayerController>().dethcam;
                 //hurt them and throw them.               
                 takerPC.knockBackVel += (taker.transform.position - gameObject.transform.position) * knockBackForce * distRatio;
-                if (isServer&& distRatio<=0)
-                {
-                    fuseTime -=1 ;
+                    if (isServer && distRatio <= 0)
+                    {
+                        fuseTime -= 1;
+                    }
                 }
-            }
-            if (takerRB)
-            {
-                //throw rigidbodies.
-                takerRB.AddExplosionForce(knockBackForce * 10.0f, gameObject.transform.position, damageRadius);
-            }
+                if (takerRB)
+                {
+                    //throw rigidbodies.
+                    takerRB.AddExplosionForce(knockBackForce * 10.0f, gameObject.transform.position, damageRadius);
+                }
 
-            i++;
+                i++;
+            }
         }
-    }
+
 
     [ClientRpc]
     public void Rpc_helth()
-        {
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, damageRadius);
-        int i = 0;
-        while (i < hitColliders.Length)
-        {
-            GameObject taker = hitColliders[i].gameObject;
-            PlayerController takerPC = taker.GetComponentInChildren<PlayerController>();
-            Rigidbody takerRB = taker.GetComponent<Rigidbody>();
-            if (takerRB == null && takerPC == null)
+    {
+       
+            Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, damageRadius);
+            int i = 0;
+            while (i < hitColliders.Length)
             {
-                i++;
-                continue;//short circuit to the next object since we aren't going to do anything.
-            }
+                GameObject taker = hitColliders[i].gameObject;
+                PlayerController takerPC = taker.GetComponentInChildren<PlayerController>();
+                Rigidbody takerRB = taker.GetComponent<Rigidbody>();
+                
+                if (takerRB == null && takerPC == null)
+                {
+                    i++;
+                    continue;//short circuit to the next object since we aren't going to do anything.
+                }
 
-            float distRatio = (damageRadius - (taker.transform.position - gameObject.transform.position).magnitude) / damageRadius;
-            if (takerPC != null)
-            {
+                float distRatio = (damageRadius - (taker.transform.position - gameObject.transform.position).magnitude) / damageRadius;
+                if (takerPC != null)
+                {
+                death = takerPC.GetComponent<PlayerController>().dethcam;
                 //hurt them and throw them.               
                 takerPC.knockBackVel += (taker.transform.position - gameObject.transform.position) * knockBackForce * distRatio;
-                if (isServer)
+                    if (isServer)
                 {
-                    if (takerPC.health <= 150)
+                    if (death == false)
                     {
-                        takerPC.health += damage;
+                        if (takerPC.health <= 150)
+                        {
+                            takerPC.health += damage;
+                        }
+                        fuseTime = 6;
+                        lifeTime = 0;
                     }
-                    fuseTime = 6;
-                    lifeTime = 0;
                 }
-            }
-            if (takerRB)
-            {
-                //throw rigidbodies.
-                takerRB.AddExplosionForce(knockBackForce * 10.0f, gameObject.transform.position, damageRadius);
-            }
+                if (takerRB)
+                {
+                    //throw rigidbodies.
+                    takerRB.AddExplosionForce(knockBackForce * 10.0f, gameObject.transform.position, damageRadius);
+                }
 
-            i++;
+                i++;
+            }
         }
     }
 }
