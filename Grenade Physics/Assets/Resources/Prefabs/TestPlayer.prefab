@@ -463,9 +463,10 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   knockBackVel: {x: 0, y: 0, z: 0}
   health: 100
-  destroyOnDeath: 1
+  destroyOnDeath: 0
   dethcam: 0
   TimeTellThown: 0
+  healthBar: {fileID: 0}
   Maxammo: 10
   characterBody: {fileID: 1268293094871930}
   characterEyes: {fileID: 1065411142697254}

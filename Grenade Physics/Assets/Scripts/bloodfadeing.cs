@@ -14,8 +14,13 @@ public class bloodfadeing : NetworkBehaviour
     private GameObject player;
     void Update()
     {
-       
-        player = GameObject.Find("TestPlayer(Clone)");
+        if (!isLocalPlayer)
+
+        {
+            return;
+        }
+
+            player = GameObject.Find("TestPlayer(Clone)");
 
         bloodAmunt = ((100 - heath) * 0.007f);
         if (fadeinblood < bloodAmunt && fadeinblood <= 0.7f)
