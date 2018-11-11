@@ -2187,6 +2187,7 @@ MonoBehaviour:
   damageRadius: 0.5
   isContactTriggered: 0
   heththing: {fileID: 37043403}
+  death: 0
 --- !u!1 &1187935297
 GameObject:
   m_ObjectHideFlags: 0

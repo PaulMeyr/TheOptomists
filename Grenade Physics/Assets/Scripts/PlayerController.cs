@@ -21,7 +21,7 @@ public class PlayerController : NetworkBehaviour
     public Vector2 targetCharacterDirection;
     public Vector3 velocity = Vector3.zero;
     public Vector3 knockBackVel = Vector3.zero;
-
+    public bool isLocalPlayer1;
     [SyncVar(hook = "OnChangeHealth")]
     public float health = 100;
     public const int maxHealth = 100;
@@ -339,6 +339,7 @@ public class PlayerController : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         GetComponent<MeshRenderer>().material.color = Color.blue;
+        isLocalPlayer1 = true;
         //make sure we are using the local camera if we are spawned.
         if (Camera.main != playerCamera)
         {
