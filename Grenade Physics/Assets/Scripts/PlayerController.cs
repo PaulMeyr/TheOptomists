@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.ImageEffects;
+
+
 [AddComponentMenu("Player Controller")]
 public class PlayerController : NetworkBehaviour
 {
@@ -28,7 +31,7 @@ public class PlayerController : NetworkBehaviour
     public bool destroyOnDeath = true;
     public bool dethcam;
     public int TimeTellThown = 0;
-
+  
   
 
     [SyncVar]
@@ -46,7 +49,6 @@ public class PlayerController : NetworkBehaviour
     public PlayerControllerSpawner objectSpawner = null;
     public Camera playerCamera = null;
     public GameObject eyes;
-
     // weaponSwitching
 
     public int toldWeapons;
@@ -76,7 +78,9 @@ public class PlayerController : NetworkBehaviour
             if (objectSpawner == null)
                 Debug.LogError("Character Body did not have a PlayerControllerSpawner.");
         }
-
+       
+    
+        
     }
 
 
@@ -96,7 +100,6 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
-      
         if (!playerCamera.enabled)
         {
             if (Camera.main != null)
@@ -294,9 +297,11 @@ public class PlayerController : NetworkBehaviour
 
     public void Rpc_Respawn()
     {
+        ColorCorrectionCurves ColorEfect = playerCamera.GetComponent<ColorCorrectionCurves>();
         dethcam = false;
         GetComponent<MeshRenderer>().enabled = true;
         eyes.SetActive(true);
+        ColorEfect.saturation = 1;
         gameObject.layer = 10;
         health = maxHealth;
         // Set the spawn point to origin as a default value
@@ -323,13 +328,15 @@ public class PlayerController : NetworkBehaviour
 
     [ClientRpc]
     public void Rpc_deathcam()
-
     {
+        ColorCorrectionCurves ColorEfect = playerCamera.GetComponent<ColorCorrectionCurves>();
         dethcam = true;
+        ColorEfect.saturation = 0;
         StartCoroutine(respawningdeath());
         GetComponent<MeshRenderer>().enabled = false;
         eyes.SetActive(false);
         gameObject.layer = 9;
+
     }
     [Command]
     public void Cmd_deathcam()
