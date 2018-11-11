@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/CharacterControllerTest.unity
+- path: Assets/Scenes/Game Level.unity
   isLoaded: 1
   isActive: 1
