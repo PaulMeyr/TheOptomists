@@ -102,7 +102,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &114950096916401988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,8 +138,8 @@ MonoBehaviour:
   hasTriggered: 0
   fuseTime: 5
   lifeTime: 0
-  damage: 100
-  knockBackForce: 10
+  damage: 1
+  knockBackForce: 100
   damageRadius: 10
   isContactTriggered: 0
 --- !u!114 &114992459116980246
