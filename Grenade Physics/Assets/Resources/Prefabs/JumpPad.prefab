@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d5f0b82779c46029c6ca0d518cdcfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PushDirection: {x: 0, y: 1000, z: 0}
+  PushDirection: {x: 0, y: 30, z: 0}
 --- !u!198 &198589228330675314
 ParticleSystem:
   m_ObjectHideFlags: 1
