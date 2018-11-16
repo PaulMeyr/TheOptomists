@@ -628,6 +628,7 @@ MonoBehaviour:
   health: 100
   destroyOnDeath: 1
   dethcam: 0
+  falling: 0
   TimeTellThown: 0
   Maxammo: 10
   characterBody: {fileID: 1268293094871930}

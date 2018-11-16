@@ -298,11 +298,18 @@ public class PlayerController : NetworkBehaviour
 
 
     }
-  
+
+    void OnCollisionEnter(Collision collision)
+    {
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            Debug.Log("player collider operating");
+        }
+       
+    }
 
     //respawning
     [ClientRpc]
-
     public void Rpc_Respawn()
     {
         ColorCorrectionCurves ColorEfect = playerCamera.GetComponent<ColorCorrectionCurves>();
