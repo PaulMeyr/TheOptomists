@@ -29,9 +29,9 @@ public class PlayerController : NetworkBehaviour
     public float health = 100;
     public const int maxHealth = 100;
     public bool destroyOnDeath = true;
-    public bool dethcam;
+    public bool dethcam,falling;
     public int TimeTellThown = 0;
-  
+
   
 
     [SyncVar]
@@ -62,6 +62,11 @@ public class PlayerController : NetworkBehaviour
             if (GameObject.Find("Ui_ingame_Canvas") == null)
             {
                 SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+                destroyOnDeath = true;
+            }
+            if (GameObject.Find("lv1") == null)
+            {
+                SceneManager.LoadScene("Game Level", LoadSceneMode.Additive);
                 destroyOnDeath = true;
             }
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
@@ -146,7 +151,10 @@ public class PlayerController : NetworkBehaviour
         }
         if (this.transform.position.y <= -3.6f)
         {
+            falling = true;
             Cmd_Respawn();
+        }else if(falling == true){
+            falling = false;
         }
 
 
@@ -303,16 +311,17 @@ public class PlayerController : NetworkBehaviour
         eyes.SetActive(true);
         ColorEfect.saturation = 1;
         gameObject.layer = 10;
-        health = maxHealth;
+        if (falling == false)
+        {
+            health = maxHealth;
+        }
         // Set the spawn point to origin as a default value
         Vector3 spawnPoint = Vector3.zero;
-
         // If there is a spawn point array and the array is not empty, pick one at random
         if (spawnPoints != null && spawnPoints.Length > 0)
         {
             spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
         }
-
         // Set the player’s position to the chosen spawn point
         transform.position = spawnPoint;
         knockBackVel = Vector3.zero;
@@ -323,7 +332,10 @@ public class PlayerController : NetworkBehaviour
     {
        
         Rpc_Respawn();
-        health = maxHealth;
+        if (falling == false)
+        {
+            health = maxHealth;
+        }
     }
 
     [ClientRpc]

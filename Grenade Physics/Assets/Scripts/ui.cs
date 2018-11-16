@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
-public class ui : NetworkBehaviour
+
+public class ui  : MonoBehaviour
 {
     public Image BaseGrenadeJPG, holygranagJPG;
     public Image blood;
@@ -73,13 +73,17 @@ public class ui : NetworkBehaviour
         if (fadeinblood < 0)
         {
             blood.enabled = false;
+        }else{
+            blood.enabled = true;
         }
         if (bloodAmunt >= 0.7)
         {
             fadeinblood = 0;
             blood.enabled = false;
+        }else{
+            blood.enabled = true;
         }
-        StartCoroutine(startfading());
+StartCoroutine(startfading());
 
     }
     IEnumerator startfading()

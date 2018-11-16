@@ -163,7 +163,6 @@ GameObject:
   - component: {fileID: 114226131280319870}
   - component: {fileID: 114004502602778142}
   - component: {fileID: 114675009911449676}
-  - component: {fileID: 114886128960139814}
   m_Layer: 5
   m_Name: Ui_ingame_Canvas
   m_TagString: Untagged
@@ -915,38 +914,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114886128960139814
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1815700295319146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 60
-    i1: 175
-    i2: 213
-    i3: 9
-    i4: 46
-    i5: 152
-    i6: 211
-    i7: 52
-    i8: 218
-    i9: 114
-    i10: 109
-    i11: 68
-    i12: 222
-    i13: 149
-    i14: 121
-    i15: 88
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114900205428677568
 MonoBehaviour:
   m_ObjectHideFlags: 1
