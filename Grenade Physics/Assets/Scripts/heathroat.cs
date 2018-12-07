@@ -13,22 +13,23 @@ public class heathroat : MonoBehaviour {
     public float speed = 5.0f;
     public  bool shouldContinue=true;
     public float hight,minhight;
-    
+    public float Cont_X, Cont_Y,Cot_Z;
+    public GameObject heat;
     // Use this for initialization
     void Start () {
-		
+       
 	}
     // Update is called once per frame
     void Update()
     {
        
-
+        Cont_Y = heat.transform.position.y;
         speedy += 3;
         float rotspeedY = speedy * speed;
         Quaternion target = Quaternion.Euler(0, rotspeedY,0);
         transform.rotation = Quaternion.Slerp(transform.rotation, target, tiltAngle * smooth);
         tiltAngle = tiltAngle + Time.deltaTime;
-        this.transform.position = new Vector3(this.transform.position.x, ypox, this.transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x, ypox+ Cont_Y, this.transform.position.z);
 
         if (ypox < hight && shouldContinue == true)
         {
@@ -38,7 +39,7 @@ public class heathroat : MonoBehaviour {
         if (ypox >= hight || shouldContinue == false)
         {
             shouldContinue = false;
-            ypox -= 0.005f;
+            ypox -= 0.0005f;
         }
         if(ypox <= minhight)
         {

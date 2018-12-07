@@ -26,43 +26,8 @@ public class PlayerControllerSpawner : NetworkBehaviour
         {
             return;
         }
-
-        toldWeapon = player.GetComponent<PlayerController>().toldWeapons;
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
-
-            if (myWeaponis >= toldWeapon - 1)
-            {
-
-                myWeaponis = 0;
-                Debug.Log("GANDE 1");
-            }
-
-            else
-            {
-                myWeaponis++;
-                Debug.Log("GANDE 2");
-            }
-
-        }
-
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-
-            if (myWeaponis <= 0)
-            {
-
-                myWeaponis = toldWeapon - 1;
-                Debug.Log("GANDE 2");
-            }
-
-            else
-            {
-                myWeaponis--;
-                Debug.Log("GANDE 1");
-            }
-
-        }
+        
+     
 
 
        
@@ -77,18 +42,11 @@ public class PlayerControllerSpawner : NetworkBehaviour
     [ClientRpc] public void Rpc_throwGrenade(float cook)
     {
      
-            //Switch/case?
-            if (myWeaponis == 0)
-            {
+           
            
                 grenade = (GameObject)Instantiate(baseGrenadePrefab, munitionSpawnLocation.position, munitionSpawnLocation.rotation);
-
-            }
-            if (myWeaponis == 1)
-            {
-                grenade = (GameObject)Instantiate(holygranagPrefab, munitionSpawnLocation.position, munitionSpawnLocation.rotation);
-            }
-
+        
+          
             grenade.GetComponent<Rigidbody>().velocity = grenade.transform.forward * (1.0f + cook) * 15.0f;
             grenade.GetComponent<Grenade>().lifeTime += cook;//we cooked the grenade a bit.
             if (NetworkServer.active)

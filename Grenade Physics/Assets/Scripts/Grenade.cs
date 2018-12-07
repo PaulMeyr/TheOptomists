@@ -69,6 +69,7 @@ public class Grenade : NetworkBehaviour {
         {
             GameObject taker = hitColliders[i].gameObject;
             PlayerController takerPC = taker.GetComponentInChildren<PlayerController>();
+
             Rigidbody takerRB = taker.GetComponent<Rigidbody>();
             if(takerRB==null&&takerPC==null)
             {
@@ -83,7 +84,8 @@ public class Grenade : NetworkBehaviour {
                 takerPC.knockBackVel += (taker.transform.position - gameObject.transform.position) * knockBackForce * distRatio;
                 if (isServer)
                 {
-                    takerPC.health -= damage * distRatio ;
+                    takerPC.health -= damage * distRatio;
+                 
                 }
             }
             if (takerRB)
