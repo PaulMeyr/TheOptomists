@@ -30,7 +30,6 @@ public class HethGrenade : Grenade
         {
             hasTriggered = false;
         }
-
         if (hasTriggered == true)
         {
             Cmd_helth();
@@ -39,13 +38,12 @@ public class HethGrenade : Grenade
         {
             Cmd_loadHeth();
         }
-
         if(fuseTime <= 0)
         {
             Cmd_reNew();
         }
     }
-    //makeing new health pickup
+
     [ClientRpc] public void Rpc_reNew()
     {
         lifeTime = 6;
@@ -57,13 +55,11 @@ public class HethGrenade : Grenade
     {
         Rpc_reNew();
     }
-    //makeing loding health
     [Command]
     public void Cmd_loadHeth()
     {
         Rpc_loadHeth();
     }
-    //dose the healing
     [Command]
     public void Cmd_helth()
     {
@@ -125,8 +121,8 @@ public class HethGrenade : Grenade
                 GameObject taker = hitColliders[i].gameObject;
                 PlayerController takerPC = taker.GetComponentInChildren<PlayerController>();
                 Rigidbody takerRB = taker.GetComponent<Rigidbody>();
-
-            if (takerRB == null && takerPC == null)
+                
+                if (takerRB == null && takerPC == null)
                 {
                     i++;
                     continue;//short circuit to the next object since we aren't going to do anything.
@@ -145,7 +141,6 @@ public class HethGrenade : Grenade
                         if (takerPC.health <= 150)
                         {
                             takerPC.health += damage;
-                        
                         }
                         fuseTime = 6;
                         lifeTime = 0;

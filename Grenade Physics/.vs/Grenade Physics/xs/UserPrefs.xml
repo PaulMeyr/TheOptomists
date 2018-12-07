@@ -1,9 +1,13 @@
 ﻿<Properties StartupConfiguration="{165BD172-CA53-47D5-0A70-37FAEDE8A3BD}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerControllerSpawner.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Grenade.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="248" Column="14" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="302" Column="5" />
       <File FileName="Assets/Scripts/PlayerControllerSpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ui.cs" Line="6" Column="17" />
+      <File FileName="Assets/Scripts/CopyPitchRotation.cs" Line="5" Column="47" />
+      <File FileName="Assets/Scripts/JumpPad.cs" Line="28" Column="5" />
+      <File FileName="Assets/Scripts/Grenade.cs" Line="86" Column="58" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

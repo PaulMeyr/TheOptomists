@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.ImageEffects;
-using UnityEngine.UI;
+
 
 [AddComponentMenu("Player Controller")]
 public class PlayerController : NetworkBehaviour
@@ -28,11 +28,10 @@ public class PlayerController : NetworkBehaviour
     [SyncVar(hook = "OnChangeHealth")]
     public float health = 100;
     public const int maxHealth = 100;
-    private bool destroyOnDeath = true;
-    public bool dethcam;
-    private bool fall;
+    public bool destroyOnDeath = true;
+    public bool dethcam,falling;
     public int TimeTellThown = 0;
-  
+
   
 
     [SyncVar]
@@ -52,12 +51,6 @@ public class PlayerController : NetworkBehaviour
     public GameObject eyes;
     // weaponSwitching
 
-    public Image blood;
-    public float fadeTime = 3.0f;
-    private float bloodAmunt, fadeinblood = 0;
-    public float Amunt;
-
-
     public int toldWeapons;
 
     void Start()
@@ -66,23 +59,16 @@ public class PlayerController : NetworkBehaviour
         if (isLocalPlayer)
 
         {
-            if (GameObject.Find("Directional Light AND Network Controller(WHY?)") == null)
-            {
-                SceneManager.LoadScene("MultiplayerTest", LoadSceneMode.Additive);
-                
-            }
-            if (GameObject.Find("lv1") == null && GameObject.Find("debug") == null)
-            {
-                SceneManager.LoadScene("Game Level", LoadSceneMode.Additive);
-             
-            }
             if (GameObject.Find("Ui_ingame_Canvas") == null)
             {
-                SceneManager.LoadScene("Ui", LoadSceneMode.Additive);
+                SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+                destroyOnDeath = true;
             }
-
-            destroyOnDeath = true;
-          
+            if (GameObject.Find("lv1") == null)
+            {
+                SceneManager.LoadScene("Game Level", LoadSceneMode.Additive);
+                destroyOnDeath = true;
+            }
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
         }
         targetDirection = transform.localRotation.eulerAngles;
@@ -163,12 +149,12 @@ public class PlayerController : NetworkBehaviour
             var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
             transform.localRotation *= yRotation;
         }
-
         if (this.transform.position.y <= -3.6f)
         {
+            falling = true;
             Cmd_Respawn();
-            fall = true;
-            dethcam = true;
+        }else if(falling == true){
+            falling = false;
         }
 
 
@@ -182,7 +168,6 @@ public class PlayerController : NetworkBehaviour
 
         if (controller.isGrounded)
         {
-            fall = false;
             velocity.y = 0;
             //extra knockback falloff when grounded.
             knockBackVel *= 1.0f - (knockBackFalloffRate * Time.deltaTime);
@@ -225,28 +210,8 @@ public class PlayerController : NetworkBehaviour
         {
             sprintMult = 1.5f;
         }
-        bloodAmunt = ((100 - health) * 0.007f);
-        if (fadeinblood < bloodAmunt && fadeinblood <= 0.7f)
-        {
-            fadeinblood += Amunt;
-        }
-        if (fadeinblood > bloodAmunt)
-        {
-            fadeinblood -= Amunt;
-        }
 
 
-
-        if (fadeinblood < 0)
-        {
-            blood.enabled = false;
-        }
-        if (bloodAmunt >= 0.7)
-        {
-            fadeinblood = 0;
-            blood.enabled = false;
-        }
-        StartCoroutine(startfading());
         if (dethcam == false)
         {
             //TODO Magic grenade reloading!
@@ -333,35 +298,37 @@ public class PlayerController : NetworkBehaviour
 
 
     }
-  
+
+    void OnCollisionEnter(Collision collision)
+    {
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            Debug.Log("player collider operating");
+        }
+       
+    }
 
     //respawning
     [ClientRpc]
-
     public void Rpc_Respawn()
     {
-        if (fall == false)
-        {
-            ColorCorrectionCurves ColorEfect = playerCamera.GetComponent<ColorCorrectionCurves>();
-            GetComponent<MeshRenderer>().enabled = true;
-            dethcam = false;
-            eyes.SetActive(true);
-            ColorEfect.saturation = 1;
-            gameObject.layer = 10;
-        }
-        if (health <= 0)
+        ColorCorrectionCurves ColorEfect = playerCamera.GetComponent<ColorCorrectionCurves>();
+        dethcam = false;
+        GetComponent<MeshRenderer>().enabled = true;
+        eyes.SetActive(true);
+        ColorEfect.saturation = 1;
+        gameObject.layer = 10;
+        if (falling == false)
         {
             health = maxHealth;
         }
         // Set the spawn point to origin as a default value
         Vector3 spawnPoint = Vector3.zero;
-
         // If there is a spawn point array and the array is not empty, pick one at random
         if (spawnPoints != null && spawnPoints.Length > 0)
         {
             spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
         }
-
         // Set the player’s position to the chosen spawn point
         transform.position = spawnPoint;
         knockBackVel = Vector3.zero;
@@ -372,7 +339,7 @@ public class PlayerController : NetworkBehaviour
     {
        
         Rpc_Respawn();
-        if (health <= 0)
+        if (falling == false)
         {
             health = maxHealth;
         }
@@ -388,7 +355,7 @@ public class PlayerController : NetworkBehaviour
         GetComponent<MeshRenderer>().enabled = false;
         eyes.SetActive(false);
         gameObject.layer = 9;
-        knockBackVel = Vector3.zero;
+
     }
     [Command]
     public void Cmd_deathcam()
@@ -413,33 +380,11 @@ public class PlayerController : NetworkBehaviour
 
         IEnumerator respawningdeath()
         {
-         yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(5);
         if (health <= 0)
         {
             Cmd_Respawn();
         }
-
-        }
-    IEnumerator startfading()
-    {
-
-
-        yield return new WaitForSeconds(4.0f);
-
-        //Removes some of the trans that is used to lerp the alpha of the material.
-        float invFadeTime = 1.0f / fadeTime;
-        for (float t = 0.0f; t < fadeTime; t += Time.deltaTime)
-        {
-            fadin();
-        }
-
-        //Destroys the object when the material is completly transparent.
-
     }
-    void fadin()
-    {
-        Color bloodColor = blood.color;
-        bloodColor.a = fadeinblood;
-        blood.color = bloodColor;
-    }
+    
 }
